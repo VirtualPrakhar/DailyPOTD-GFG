@@ -1,0 +1,139 @@
+📌 GFG POTD – 02 January 2026
+
+🔍 Topic:
+Arrays - Sorting - Data Structures - Algorithms
+
+❓ Problem Statement:
+Sort 0s, 1s and 2s
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 📸 Instagram: https://www.instagram.com/campusprepp/
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+Java Solution============================================================
+class Solution {
+    public void sort012(int[] arr) {
+        int low = 0, mid = 0, high = arr.length - 1;
+
+        while (mid <= high) {
+            if (arr[mid] == 0) {
+                swap(arr, low, mid);
+                low++;
+                mid++;
+            } else if (arr[mid] == 1) {
+                mid++;
+            } else { // arr[mid] == 2
+                swap(arr, mid, high);
+                high--;
+            }
+        }
+    }
+
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
+
+
+Python Solution===========================================================
+class Solution:
+    def sort012(self, arr):
+        low = mid = 0
+        high = len(arr) - 1
+
+        while mid <= high:
+            if arr[mid] == 0:
+                arr[low], arr[mid] = arr[mid], arr[low]
+                low += 1
+                mid += 1
+            elif arr[mid] == 1:
+                mid += 1
+            else:  # arr[mid] == 2
+                arr[mid], arr[high] = arr[high], arr[mid]
+                high -= 1
+
+
+
+C++ Solution==============================================================
+class Solution {
+  public:
+    void sort012(vector<int>& arr) {
+        int low = 0, mid = 0, high = arr.size() - 1;
+
+        while (mid <= high) {
+            if (arr[mid] == 0) {
+                swap(arr[low], arr[mid]);
+                low++;
+                mid++;
+            } 
+            else if (arr[mid] == 1) {
+                mid++;
+            } 
+            else { // arr[mid] == 2
+                swap(arr[mid], arr[high]);
+                high--;
+            }
+        }
+    }
+};
+
+
+
+JavaScript Solution=======================================================
+class Solution {
+    sort012(arr) {
+        let low = 0, mid = 0, high = arr.length - 1;
+
+        while (mid <= high) {
+            if (arr[mid] === 0) {
+                [arr[low], arr[mid]] = [arr[mid], arr[low]];
+                low++;
+                mid++;
+            } else if (arr[mid] === 1) {
+                mid++;
+            } else { // arr[mid] === 2
+                [arr[mid], arr[high]] = [arr[high], arr[mid]];
+                high--;
+            }
+        }
+    }
+}
+
+
+
+Company Asked: 
+Paytm
+Flipkart
+Morgan Stanley
+Amazon
+Microsoft
+OYO Rooms
+Samsung
+Snapdeal
+Hike
+MakeMyTrip
+Ola Cabs
+Walmart
+MAQ Software
+Adobe
+Yatra.com
+SAP Labs
+Qualcomm

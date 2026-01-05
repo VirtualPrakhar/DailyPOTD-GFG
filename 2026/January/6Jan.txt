@@ -1,0 +1,128 @@
+📌 GFG POTD – 06 January 2026
+
+🔍 Topic:
+Bit Magic | sliding-window | Arrays
+
+❓ Problem Statement:
+Max Xor Subarray of size K
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 📸 Instagram: https://www.instagram.com/campusprepp/
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+Java Solution============================================================
+class Solution {
+    public int maxSubarrayXOR(int[] arr, int k) {
+        int n = arr.length;
+        int currXor = 0;
+
+        // XOR of first window of size k
+        for (int i = 0; i < k; i++) {
+            currXor ^= arr[i];
+        }
+
+        int maxXor = currXor;
+
+        // Slide the window
+        for (int i = k; i < n; i++) {
+            // Remove element going out of window
+            currXor ^= arr[i - k];
+            // Add new element coming into window
+            currXor ^= arr[i];
+
+            maxXor = Math.max(maxXor, currXor);
+        }
+
+        return maxXor;
+    }
+}
+
+
+Python Solution===========================================================
+class Solution:
+    def maxSubarrayXOR(self, arr, k):
+        n = len(arr)
+        curr_xor = 0
+
+        # XOR of first window
+        for i in range(k):
+            curr_xor ^= arr[i]
+
+        max_xor = curr_xor
+
+        # Slide the window
+        for i in range(k, n):
+            curr_xor ^= arr[i - k]  # remove left
+            curr_xor ^= arr[i]      # add right
+            max_xor = max(max_xor, curr_xor)
+
+        return max_xor
+
+
+C++ Solution==============================================================
+class Solution {
+public:
+    int maxSubarrayXOR(vector<int>& arr, int k) {
+        int n = arr.size();
+        int currXor = 0;
+
+        // XOR of first window
+        for (int i = 0; i < k; i++) {
+            currXor ^= arr[i];
+        }
+
+        int maxXor = currXor;
+
+        // Slide the window
+        for (int i = k; i < n; i++) {
+            currXor ^= arr[i - k]; // remove left
+            currXor ^= arr[i];     // add right
+            maxXor = max(maxXor, currXor);
+        }
+
+        return maxXor;
+    }
+};
+
+
+JavaScript Solution=======================================================
+class Solution {
+    maxSubarrayXOR(arr, k) {
+        let currXor = 0;
+
+        // XOR of first window
+        for (let i = 0; i < k; i++) {
+            currXor ^= arr[i];
+        }
+
+        let maxXor = currXor;
+
+        // Slide the window
+        for (let i = k; i < arr.length; i++) {
+            currXor ^= arr[i - k]; // remove left
+            currXor ^= arr[i];     // add right
+            maxXor = Math.max(maxXor, currXor);
+        }
+
+        return maxXor;
+    }
+}
+
+
+Company Asked: 
+Will update soon

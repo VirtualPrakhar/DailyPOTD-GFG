@@ -1,0 +1,150 @@
+📌 GFG POTD – 07 January 2026
+
+
+❓ Problem Statement:
+Count distinct elements in every window
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 📸 Instagram: https://www.instagram.com/campusprepp/
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    ArrayList<Integer> countDistinct(int arr[], int k) {
+        ArrayList<Integer> result = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        // First window
+        for (int i = 0; i < k; i++) {
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+        }
+        result.add(map.size());
+
+        // Slide the window
+        for (int i = k; i < arr.length; i++) {
+            // Remove element going out of window
+            int out = arr[i - k];
+            map.put(out, map.get(out) - 1);
+            if (map.get(out) == 0) {
+                map.remove(out);
+            }
+
+            // Add new element
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+
+            result.add(map.size());
+        }
+
+        return result;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def countDistinct(self, arr, k):
+        from collections import defaultdict
+
+        freq = defaultdict(int)
+        result = []
+
+        # First window
+        for i in range(k):
+            freq[arr[i]] += 1
+        result.append(len(freq))
+
+        # Slide the window
+        for i in range(k, len(arr)):
+            out = arr[i - k]
+            freq[out] -= 1
+            if freq[out] == 0:
+                del freq[out]
+
+            freq[arr[i]] += 1
+            result.append(len(freq))
+
+        return result
+
+
+===========================C++ Solution==============================
+class Solution {
+  public:
+    vector<int> countDistinct(vector<int> &arr, int k) {
+        unordered_map<int, int> freq;
+        vector<int> result;
+
+        int n = arr.size();
+
+        // First window
+        for (int i = 0; i < k; i++) {
+            freq[arr[i]]++;
+        }
+        result.push_back(freq.size());
+
+        // Slide the window
+        for (int i = k; i < n; i++) {
+            int out = arr[i - k];
+            freq[out]--;
+            if (freq[out] == 0) {
+                freq.erase(out);
+            }
+
+            freq[arr[i]]++;
+            result.push_back(freq.size());
+        }
+
+        return result;
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    countDistinct(arr, k) {
+        const freq = new Map();
+        const result = [];
+
+        // First window
+        for (let i = 0; i < k; i++) {
+            freq.set(arr[i], (freq.get(arr[i]) || 0) + 1);
+        }
+        result.push(freq.size);
+
+        // Slide the window
+        for (let i = k; i < arr.length; i++) {
+            const out = arr[i - k];
+            freq.set(out, freq.get(out) - 1);
+            if (freq.get(out) === 0) {
+                freq.delete(out);
+            }
+
+            freq.set(arr[i], (freq.get(arr[i]) || 0) + 1);
+            result.push(freq.size);
+        }
+
+        return result;
+    }
+}
+
+
+Company Asked: 
+Accolite
+Amazon
+Microsoft

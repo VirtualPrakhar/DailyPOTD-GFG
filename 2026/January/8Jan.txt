@@ -1,0 +1,123 @@
+📌 GFG POTD – 08 January 2026
+
+
+❓ Problem Statement:
+Count Subarray with k odds
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 📸 Instagram: https://www.instagram.com/campusprepp/
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    public int countSubarrays(int[] arr, int k) {
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        freq.put(0, 1); // base case
+
+        int oddCount = 0;
+        int result = 0;
+
+        for (int num : arr) {
+            if (num % 2 != 0) {
+                oddCount++;
+            }
+
+            result += freq.getOrDefault(oddCount - k, 0);
+            freq.put(oddCount, freq.getOrDefault(oddCount, 0) + 1);
+        }
+
+        return result;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def countSubarrays(self, arr, k):
+        from collections import defaultdict
+
+        freq = defaultdict(int)
+        freq[0] = 1
+
+        odd_count = 0
+        result = 0
+
+        for num in arr:
+            if num % 2 != 0:
+                odd_count += 1
+
+            result += freq[odd_count - k]
+            freq[odd_count] += 1
+
+        return result
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    int countSubarrays(vector<int>& arr, int k) {
+        unordered_map<int, int> freq;
+        freq[0] = 1;
+
+        int oddCount = 0;
+        int result = 0;
+
+        for (int num : arr) {
+            if (num % 2 != 0) {
+                oddCount++;
+            }
+
+            if (freq.find(oddCount - k) != freq.end()) {
+                result += freq[oddCount - k];
+            }
+
+            freq[oddCount]++;
+        }
+
+        return result;
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    countSubarrays(arr, k) {
+        const freq = new Map();
+        freq.set(0, 1);
+
+        let oddCount = 0;
+        let result = 0;
+
+        for (const num of arr) {
+            if (num % 2 !== 0) {
+                oddCount++;
+            }
+
+            result += freq.get(oddCount - k) || 0;
+            freq.set(oddCount, (freq.get(oddCount) || 0) + 1);
+        }
+
+        return result;
+    }
+}
+
+
+Company Asked: 
+Will update soon

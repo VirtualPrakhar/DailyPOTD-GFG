@@ -1,0 +1,133 @@
+📌 GFG POTD – 09 January 2026
+
+
+❓ Problem Statement:
+Subarrays With At Most K Distinct Integers
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    public int countAtMostK(int arr[], int k) {
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        int left = 0;
+        int result = 0;
+
+        for (int right = 0; right < arr.length; right++) {
+            // Add current element
+            freq.put(arr[right], freq.getOrDefault(arr[right], 0) + 1);
+
+            // Shrink window if distinct count exceeds k
+            while (freq.size() > k) {
+                freq.put(arr[left], freq.get(arr[left]) - 1);
+                if (freq.get(arr[left]) == 0) {
+                    freq.remove(arr[left]);
+                }
+                left++;
+            }
+
+            // Count valid subarrays ending at right
+            result += (right - left + 1);
+        }
+
+        return result;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def countAtMostK(self, arr, k):
+        from collections import defaultdict
+
+        freq = defaultdict(int)
+        left = 0
+        result = 0
+
+        for right in range(len(arr)):
+            freq[arr[right]] += 1
+
+            while len(freq) > k:
+                freq[arr[left]] -= 1
+                if freq[arr[left]] == 0:
+                    del freq[arr[left]]
+                left += 1
+
+            result += (right - left + 1)
+
+        return result
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    int countAtMostK(vector<int>& arr, int k) {
+        unordered_map<int, int> freq;
+        int left = 0;
+        int result = 0;
+
+        for (int right = 0; right < arr.size(); right++) {
+            freq[arr[right]]++;
+
+            while (freq.size() > k) {
+                freq[arr[left]]--;
+                if (freq[arr[left]] == 0) {
+                    freq.erase(arr[left]);
+                }
+                left++;
+            }
+
+            result += (right - left + 1);
+        }
+
+        return result;
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    countAtMostK(arr, k) {
+        const freq = new Map();
+        let left = 0;
+        let result = 0;
+
+        for (let right = 0; right < arr.length; right++) {
+            freq.set(arr[right], (freq.get(arr[right]) || 0) + 1);
+
+            while (freq.size > k) {
+                freq.set(arr[left], freq.get(arr[left]) - 1);
+                if (freq.get(arr[left]) === 0) {
+                    freq.delete(arr[left]);
+                }
+                left++;
+            }
+
+            result += (right - left + 1);
+        }
+
+        return result;
+    }
+}
+
+
+Company Asked: 
+Will update soon

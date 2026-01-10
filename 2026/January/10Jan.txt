@@ -1,0 +1,157 @@
+📌 GFG POTD – 10 January 2026
+
+
+❓ Problem Statement:
+Substrings with K Distinct
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+
+    private long atMostK(String s, int k) {
+        int left = 0;
+        long count = 0;
+        int distinct = 0;
+        int[] freq = new int[26];
+
+        for (int right = 0; right < s.length(); right++) {
+            if (freq[s.charAt(right) - 'a'] == 0)
+                distinct++;
+            freq[s.charAt(right) - 'a']++;
+
+            while (distinct > k) {
+                freq[s.charAt(left) - 'a']--;
+                if (freq[s.charAt(left) - 'a'] == 0)
+                    distinct--;
+                left++;
+            }
+
+            count += (right - left + 1);
+        }
+        return count;
+    }
+
+    public int countSubstr(String s, int k) {
+        if (k == 0)
+            return 0;
+        return (int) (atMostK(s, k) - atMostK(s, k - 1));
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def countSubstr(self, s: str, k: int) -> int:
+        
+        def atMostK(k):
+            left = 0
+            freq = {}
+            distinct = 0
+            count = 0
+
+            for right in range(len(s)):
+                if s[right] not in freq:
+                    freq[s[right]] = 0
+                    distinct += 1
+                freq[s[right]] += 1
+
+                while distinct > k:
+                    freq[s[left]] -= 1
+                    if freq[s[left]] == 0:
+                        del freq[s[left]]
+                        distinct -= 1
+                    left += 1
+
+                count += right - left + 1
+
+            return count
+
+        if k == 0:
+            return 0
+        return atMostK(k) - atMostK(k - 1)
+
+
+===========================C++ Solution==============================
+class Solution {
+  public:
+    long long atMostK(string s, int k) {
+        unordered_map<char, int> freq;
+        int left = 0;
+        long long count = 0;
+
+        for (int right = 0; right < s.size(); right++) {
+            freq[s[right]]++;
+
+            while (freq.size() > k) {
+                freq[s[left]]--;
+                if (freq[s[left]] == 0)
+                    freq.erase(s[left]);
+                left++;
+            }
+
+            count += (right - left + 1);
+        }
+        return count;
+    }
+
+    int countSubstr(string s, int k) {
+        if (k == 0)
+            return 0;
+        return atMostK(s, k) - atMostK(s, k - 1);
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    countSubstr(s, k) {
+
+        const atMostK = (k) => {
+            let left = 0;
+            let count = 0;
+            const freq = new Map();
+
+            for (let right = 0; right < s.length; right++) {
+                freq.set(s[right], (freq.get(s[right]) || 0) + 1);
+
+                while (freq.size > k) {
+                    freq.set(s[left], freq.get(s[left]) - 1);
+                    if (freq.get(s[left]) === 0) {
+                        freq.delete(s[left]);
+                    }
+                    left++;
+                }
+
+                count += (right - left + 1);
+            }
+
+            return count;
+        };
+
+        if (k === 0) return 0;
+        return atMostK(k) - atMostK(k - 1);
+    }
+}
+
+
+Company Asked: 
+D-E-Shaw

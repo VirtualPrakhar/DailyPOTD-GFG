@@ -1,0 +1,236 @@
+📌 GFG POTD – 11 January 2026
+
+
+❓ Problem Statement:
+Minimum Window Subsequence
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    public String minWindow(String s1, String s2) {
+        int n = s1.length();
+        int m = s2.length();
+
+        int minLen = Integer.MAX_VALUE;
+        int startIndex = -1;
+
+        int i = 0;
+
+        while (i < n) {
+            int j = 0;
+
+            // Step 1: try to match s2 as subsequence
+            while (i < n) {
+                if (s1.charAt(i) == s2.charAt(j)) {
+                    j++;
+                    if (j == m) break;
+                }
+                i++;
+            }
+
+            // If s2 not fully matched
+            if (j < m) break;
+
+            // Step 2: backtrack to find minimum window
+            int end = i;
+            j = m - 1;
+
+            while (i >= 0) {
+                if (s1.charAt(i) == s2.charAt(j)) {
+                    j--;
+                    if (j < 0) break;
+                }
+                i--;
+            }
+
+            int start = i;
+            int windowLen = end - start + 1;
+
+            if (windowLen < minLen) {
+                minLen = windowLen;
+                startIndex = start;
+            }
+
+            // Move i forward to search for next window
+            i = start + 1;
+        }
+
+        return startIndex == -1 ? "" : s1.substring(startIndex, startIndex + minLen);
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def minWindow(self, s1: str, s2: str) -> str:
+        n, m = len(s1), len(s2)
+        min_len = float('inf')
+        start_idx = -1
+        i = 0
+
+        while i < n:
+            j = 0
+
+            # Forward scan to match s2 as subsequence
+            while i < n:
+                if s1[i] == s2[j]:
+                    j += 1
+                    if j == m:
+                        break
+                i += 1
+
+            if j < m:
+                break
+
+            # Backward scan to minimize window
+            end = i
+            j = m - 1
+            while i >= 0:
+                if s1[i] == s2[j]:
+                    j -= 1
+                    if j < 0:
+                        break
+                i -= 1
+
+            start = i
+            window_len = end - start + 1
+
+            if window_len < min_len:
+                min_len = window_len
+                start_idx = start
+
+            i = start + 1
+
+        return "" if start_idx == -1 else s1[start_idx:start_idx + min_len]
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    string minWindow(string s1, string s2) {
+        int n = s1.size(), m = s2.size();
+        int minLen = INT_MAX;
+        int startIdx = -1;
+
+        int i = 0;
+
+        while (i < n) {
+            int j = 0;
+
+            // Forward scan
+            while (i < n) {
+                if (s1[i] == s2[j]) {
+                    j++;
+                    if (j == m) break;
+                }
+                i++;
+            }
+
+            if (j < m) break;
+
+            // Backward scan
+            int end = i;
+            j = m - 1;
+
+            while (i >= 0) {
+                if (s1[i] == s2[j]) {
+                    j--;
+                    if (j < 0) break;
+                }
+                i--;
+            }
+
+            int start = i;
+            int windowLen = end - start + 1;
+
+            if (windowLen < minLen) {
+                minLen = windowLen;
+                startIdx = start;
+            }
+
+            i = start + 1;
+        }
+
+        return startIdx == -1 ? "" : s1.substr(startIdx, minLen);
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    /**
+     * @param {string} s1
+     * @param {string} s2
+     * @return {string}
+     */
+    minWindow(s1, s2) {
+        const n = s1.length;
+        const m = s2.length;
+
+        let minLen = Infinity;
+        let startIdx = -1;
+        let i = 0;
+
+        while (i < n) {
+            let j = 0;
+
+            // Forward scan
+            while (i < n) {
+                if (s1[i] === s2[j]) {
+                    j++;
+                    if (j === m) break;
+                }
+                i++;
+            }
+
+            if (j < m) break;
+
+            // Backward scan
+            let end = i;
+            j = m - 1;
+
+            while (i >= 0) {
+                if (s1[i] === s2[j]) {
+                    j--;
+                    if (j < 0) break;
+                }
+                i--;
+            }
+
+            let start = i;
+            let windowLen = end - start + 1;
+
+            if (windowLen < minLen) {
+                minLen = windowLen;
+                startIdx = start;
+            }
+
+            i = start + 1;
+        }
+
+        return startIdx === -1 ? "" : s1.substring(startIdx, startIdx + minLen);
+    }
+}
+
+
+Company Asked: 
+will update soon

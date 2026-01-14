@@ -1,0 +1,164 @@
+📌 GFG POTD – 14 January 2026
+
+
+❓ Problem Statement:
+Police and Thieves
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    public int catchThieves(char[] arr, int k) {
+        ArrayList<Integer> police = new ArrayList<>();
+        ArrayList<Integer> thief = new ArrayList<>();
+
+        // Store indices
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 'P') police.add(i);
+            else thief.add(i);
+        }
+
+        int i = 0, j = 0;
+        int count = 0;
+
+        // Two pointer matching
+        while (i < police.size() && j < thief.size()) {
+            if (Math.abs(police.get(i) - thief.get(j)) <= k) {
+                count++;
+                i++;
+                j++;
+            } else if (police.get(i) < thief.get(j)) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        return count;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def catchThieves(self, arr, k):
+        police = []
+        thieves = []
+
+        # Store indices
+        for i, ch in enumerate(arr):
+            if ch == 'P':
+                police.append(i)
+            else:
+                thieves.append(i)
+
+        i = j = 0
+        count = 0
+
+        # Two pointer matching
+        while i < len(police) and j < len(thieves):
+            if abs(police[i] - thieves[j]) <= k:
+                count += 1
+                i += 1
+                j += 1
+            elif police[i] < thieves[j]:
+                i += 1
+            else:
+                j += 1
+
+        return count
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    int catchThieves(vector<char>& arr, int k) {
+        vector<int> police, thieves;
+
+        // Store indices
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr[i] == 'P')
+                police.push_back(i);
+            else
+                thieves.push_back(i);
+        }
+
+        int i = 0, j = 0, count = 0;
+
+        // Two pointer matching
+        while (i < police.size() && j < thieves.size()) {
+            if (abs(police[i] - thieves[j]) <= k) {
+                count++;
+                i++;
+                j++;
+            }
+            else if (police[i] < thieves[j]) {
+                i++;
+            }
+            else {
+                j++;
+            }
+        }
+
+        return count;
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    /**
+     * @param {character[]} arr
+     * @param {number} k
+     * @return {number}
+     */
+    catchThieves(arr, k) {
+        const police = [];
+        const thieves = [];
+
+        // Store indices
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === 'P') police.push(i);
+            else thieves.push(i);
+        }
+
+        let i = 0, j = 0, count = 0;
+
+        // Two pointer matching
+        while (i < police.length && j < thieves.length) {
+            if (Math.abs(police[i] - thieves[j]) <= k) {
+                count++;
+                i++;
+                j++;
+            } else if (police[i] < thieves[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        return count;
+    }
+}
+
+
+Company Asked: 
+Microsoft

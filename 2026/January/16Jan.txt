@@ -1,0 +1,182 @@
+📌 GFG POTD – 16 January 2026
+
+
+❓ Problem Statement:
+Police and Thieves
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+import java.util.*;
+
+class Solution {
+    public int minMen(int[] arr) {
+        int n = arr.length;
+        List<int[]> intervals = new ArrayList<>();
+
+        // Convert workers into intervals
+        for (int i = 0; i < n; i++) {
+            if (arr[i] != -1) {
+                int left = Math.max(0, i - arr[i]);
+                int right = Math.min(n - 1, i + arr[i]);
+                intervals.add(new int[]{left, right});
+            }
+        }
+
+        // Sort intervals by starting point
+        intervals.sort((a, b) -> a[0] - b[0]);
+
+        int count = 0;
+        int covered = 0;
+        int i = 0;
+
+        // Greedy coverage of [0, n-1]
+        while (covered < n) {
+            int farthest = covered;
+
+            while (i < intervals.size() && intervals.get(i)[0] <= covered) {
+                farthest = Math.max(farthest, intervals.get(i)[1] + 1);
+                i++;
+            }
+
+            // If we cannot extend coverage
+            if (farthest == covered)
+                return -1;
+
+            count++;
+            covered = farthest;
+        }
+
+        return count;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def minMen(self, arr):
+        n = len(arr)
+        intervals = []
+
+        for i in range(n):
+            if arr[i] != -1:
+                l = max(0, i - arr[i])
+                r = min(n - 1, i + arr[i])
+                intervals.append((l, r))
+
+        intervals.sort()
+
+        count = 0
+        i = 0
+        covered = 0
+
+        while covered < n:
+            farthest = covered
+            while i < len(intervals) and intervals[i][0] <= covered:
+                farthest = max(farthest, intervals[i][1] + 1)
+                i += 1
+
+            if farthest == covered:
+                return -1
+
+            count += 1
+            covered = farthest
+
+        return count
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    int minMen(vector<int>& arr) {
+        int n = arr.size();
+        vector<pair<int, int>> intervals;
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] != -1) {
+                int l = max(0, i - arr[i]);
+                int r = min(n - 1, i + arr[i]);
+                intervals.push_back({l, r});
+            }
+        }
+
+        sort(intervals.begin(), intervals.end());
+
+        int count = 0, i = 0, covered = 0;
+
+        while (covered < n) {
+            int farthest = covered;
+            while (i < intervals.size() && intervals[i].first <= covered) {
+                farthest = max(farthest, intervals[i].second + 1);
+                i++;
+            }
+
+            if (farthest == covered)
+                return -1;
+
+            count++;
+            covered = farthest;
+        }
+
+        return count;
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    minMen(arr) {
+        const n = arr.length;
+        const intervals = [];
+
+        for (let i = 0; i < n; i++) {
+            if (arr[i] !== -1) {
+                const l = Math.max(0, i - arr[i]);
+                const r = Math.min(n - 1, i + arr[i]);
+                intervals.push([l, r]);
+            }
+        }
+
+        intervals.sort((a, b) => a[0] - b[0]);
+
+        let count = 0, i = 0, covered = 0;
+
+        while (covered < n) {
+            let farthest = covered;
+            while (i < intervals.length && intervals[i][0] <= covered) {
+                farthest = Math.max(farthest, intervals[i][1] + 1);
+                i++;
+            }
+
+            if (farthest === covered)
+                return -1;
+
+            count++;
+            covered = farthest;
+        }
+
+        return count;
+    }
+}
+
+
+Company Asked: 
+will update soon

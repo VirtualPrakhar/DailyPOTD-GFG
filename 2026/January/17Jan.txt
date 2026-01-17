@@ -1,0 +1,137 @@
+📌 GFG POTD – 17 January 2026
+
+
+❓ Problem Statement:
+Expression contains redundant bracket or not
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    public static boolean checkRedundancy(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : s.toCharArray()) {
+            if (ch == ')') {
+                boolean hasOperator = false;
+
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    char top = stack.pop();
+                    if (top == '+' || top == '-' || top == '*' || top == '/') {
+                        hasOperator = true;
+                    }
+                }
+
+                // Remove '('
+                stack.pop();
+
+                // If no operator inside brackets → redundant
+                if (!hasOperator) return true;
+            } else {
+                stack.push(ch);
+            }
+        }
+        return false;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def checkRedundancy(self, s: str) -> bool:
+        stack = []
+
+        for ch in s:
+            if ch == ')':
+                has_operator = False
+                while stack and stack[-1] != '(':
+                    if stack[-1] in '+-*/':
+                        has_operator = True
+                    stack.pop()
+                stack.pop()  # remove '('
+                if not has_operator:
+                    return True
+            else:
+                stack.append(ch)
+
+        return False
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    bool checkRedundancy(string s) {
+        stack<char> st;
+
+        for (char ch : s) {
+            if (ch == ')') {
+                bool hasOperator = false;
+
+                while (!st.empty() && st.top() != '(') {
+                    char top = st.top();
+                    st.pop();
+                    if (top == '+' || top == '-' || top == '*' || top == '/')
+                        hasOperator = true;
+                }
+
+                st.pop(); // remove '('
+
+                if (!hasOperator)
+                    return true;
+            } else {
+                st.push(ch);
+            }
+        }
+        return false;
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    checkRedundancy(s) {
+        const stack = [];
+
+        for (const ch of s) {
+            if (ch === ')') {
+                let hasOperator = false;
+
+                while (stack.length && stack[stack.length - 1] !== '(') {
+                    const top = stack.pop();
+                    if (top === '+' || top === '-' || top === '*' || top === '/') {
+                        hasOperator = true;
+                    }
+                }
+
+                stack.pop(); // remove '('
+
+                if (!hasOperator) return true;
+            } else {
+                stack.push(ch);
+            }
+        }
+        return false;
+    }
+}
+
+
+Company Asked: 
+will update soon

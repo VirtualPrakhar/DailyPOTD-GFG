@@ -2,7 +2,7 @@
 
 
 ❓ Problem Statement:
-Police and Thieves
+Minimum Number of Workers
 
 
 📝 Difficulty:

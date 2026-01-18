@@ -1,0 +1,129 @@
+📌 GFG POTD – 18 January 2026
+
+
+❓ Problem Statement:
+Next element with greater frequency
+
+
+📝 Difficulty:
+⭐ Medium
+
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+
+⭐ **Star this repo if it helps you!**
+
+
+🧠 Solution:
+=========================Java Solution==================================
+import java.util.*;
+
+class Solution {
+    public ArrayList<Integer> nextFreqGreater(int[] arr) {
+        int n = arr.length;
+        ArrayList<Integer> res = new ArrayList<>();
+        Map<Integer, Integer> freq = new HashMap<>();
+
+        for (int x : arr)
+            freq.put(x, freq.getOrDefault(x, 0) + 1);
+
+        Stack<Integer> st = new Stack<>();
+        int[] ans = new int[n];
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!st.isEmpty() && freq.get(st.peek()) <= freq.get(arr[i]))
+                st.pop();
+
+            ans[i] = st.isEmpty() ? -1 : st.peek();
+            st.push(arr[i]);
+        }
+
+        for (int x : ans) res.add(x);
+        return res;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def nextFreqGreater(self, arr):
+        from collections import Counter
+        freq = Counter(arr)
+        stack = []
+        n = len(arr)
+        ans = [-1] * n
+
+        for i in range(n - 1, -1, -1):
+            while stack and freq[stack[-1]] <= freq[arr[i]]:
+                stack.pop()
+            ans[i] = stack[-1] if stack else -1
+            stack.append(arr[i])
+
+        return ans
+
+
+===========================C++ Solution==============================
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> nextFreqGreater(vector<int>& arr) {
+        unordered_map<int, int> freq;
+        for (int x : arr) freq[x]++;
+
+        int n = arr.size();
+        vector<int> ans(n);
+        stack<int> st;
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!st.empty() && freq[st.top()] <= freq[arr[i]])
+                st.pop();
+
+            ans[i] = st.empty() ? -1 : st.top();
+            st.push(arr[i]);
+        }
+        return ans;
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    nextFreqGreater(arr) {
+        const freq = new Map();
+        for (let x of arr)
+            freq.set(x, (freq.get(x) || 0) + 1);
+
+        const n = arr.length;
+        const ans = new Array(n).fill(-1);
+        const stack = [];
+
+        for (let i = n - 1; i >= 0; i--) {
+            while (
+                stack.length &&
+                freq.get(stack[stack.length - 1]) <= freq.get(arr[i])
+            ) {
+                stack.pop();
+            }
+
+            ans[i] = stack.length ? stack[stack.length - 1] : -1;
+            stack.push(arr[i]);
+        }
+
+        return ans;
+    }
+}
+
+
+Company Asked: 
+will update soon

@@ -1,0 +1,188 @@
+📌 GFG POTD – 22 January 2026
+
+❓ Problem Statement:
+Sum of subarray ranges
+
+📝 Difficulty:
+⭐ Medium
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+⭐ **Star this repo if it helps you!**
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    public int subarrayRanges(int[] nums) {
+        long maxSum = getSum(nums, true);
+        long minSum = getSum(nums, false);
+        return (int)(maxSum - minSum);
+    }
+
+    private long getSum(int[] nums, boolean isMax) {
+        int n = nums.length;
+        long sum = 0;
+        int[] left = new int[n];
+        int[] right = new int[n];
+
+        java.util.Stack<Integer> stack = new java.util.Stack<>();
+
+        // Previous Greater / Smaller
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() &&
+                  (isMax ? nums[stack.peek()] <= nums[i]
+                         : nums[stack.peek()] >= nums[i]))
+                stack.pop();
+
+            left[i] = stack.isEmpty() ? i + 1 : i - stack.peek();
+            stack.push(i);
+        }
+
+        stack.clear();
+
+        // Next Greater / Smaller
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() &&
+                  (isMax ? nums[stack.peek()] < nums[i]
+                         : nums[stack.peek()] > nums[i]))
+                stack.pop();
+
+            right[i] = stack.isEmpty() ? n - i : stack.peek() - i;
+            stack.push(i);
+        }
+
+        for (int i = 0; i < n; i++)
+            sum += (long) nums[i] * left[i] * right[i];
+
+        return sum;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def subarrayRanges(self, nums):
+        def calc(is_max):
+            n = len(nums)
+            left = [0] * n
+            right = [0] * n
+            stack = []
+            res = 0
+
+            for i in range(n):
+                while stack and (nums[stack[-1]] <= nums[i] if is_max else nums[stack[-1]] >= nums[i]):
+                    stack.pop()
+                left[i] = i + 1 if not stack else i - stack[-1]
+                stack.append(i)
+
+            stack.clear()
+
+            for i in range(n - 1, -1, -1):
+                while stack and (nums[stack[-1]] < nums[i] if is_max else nums[stack[-1]] > nums[i]):
+                    stack.pop()
+                right[i] = n - i if not stack else stack[-1] - i
+                stack.append(i)
+
+            for i in range(n):
+                res += nums[i] * left[i] * right[i]
+            return res
+
+        return calc(True) - calc(False)
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    long long helper(vector<int>& nums, bool isMax) {
+        int n = nums.size();
+        vector<int> left(n), right(n);
+        stack<int> st;
+        long long res = 0;
+
+        for (int i = 0; i < n; i++) {
+            while (!st.empty() &&
+                  (isMax ? nums[st.top()] <= nums[i]
+                         : nums[st.top()] >= nums[i]))
+                st.pop();
+
+            left[i] = st.empty() ? i + 1 : i - st.top();
+            st.push(i);
+        }
+
+        while (!st.empty()) st.pop();
+
+        for (int i = n - 1; i >= 0; i--) {
+            while (!st.empty() &&
+                  (isMax ? nums[st.top()] < nums[i]
+                         : nums[st.top()] > nums[i]))
+                st.pop();
+
+            right[i] = st.empty() ? n - i : st.top() - i;
+            st.push(i);
+        }
+
+        for (int i = 0; i < n; i++)
+            res += (long long) nums[i] * left[i] * right[i];
+
+        return res;
+    }
+
+    int subarrayRanges(vector<int>& nums) {
+        return helper(nums, true) - helper(nums, false);
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    subarrayRanges(nums) {
+        const calc = (isMax) => {
+            const n = nums.length;
+            const left = new Array(n);
+            const right = new Array(n);
+            const stack = [];
+            let res = 0;
+
+            for (let i = 0; i < n; i++) {
+                while (stack.length &&
+                      (isMax ? nums[stack.at(-1)] <= nums[i]
+                             : nums[stack.at(-1)] >= nums[i]))
+                    stack.pop();
+
+                left[i] = stack.length ? i - stack.at(-1) : i + 1;
+                stack.push(i);
+            }
+
+            stack.length = 0;
+
+            for (let i = n - 1; i >= 0; i--) {
+                while (stack.length &&
+                      (isMax ? nums[stack.at(-1)] < nums[i]
+                             : nums[stack.at(-1)] > nums[i]))
+                    stack.pop();
+
+                right[i] = stack.length ? stack.at(-1) - i : n - i;
+                stack.push(i);
+            }
+
+            for (let i = 0; i < n; i++)
+                res += nums[i] * left[i] * right[i];
+
+            return res;
+        };
+
+        return calc(true) - calc(false);
+    }
+}
+
+
+Company Asked: 
+will update soon

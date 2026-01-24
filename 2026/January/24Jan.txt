@@ -1,0 +1,75 @@
+📌 GFG POTD – 24 January 2026
+
+❓ Problem Statement:
+Josephus problem
+
+📝 Difficulty:
+⭐ Easy
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+⭐ **Star this repo if it helps you!**
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    public int josephus(int n, int k) {
+        int res = 0; // 0-based index
+
+        for (int i = 1; i <= n; i++) {
+            res = (res + k) % i;
+        }
+
+        return res + 1; // convert to 1-based
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def josephus(self, n, k):
+        res = 0
+        for i in range(1, n + 1):
+            res = (res + k) % i
+        return res + 1
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    int josephus(int n, int k) {
+        int res = 0;  // 0-based index
+
+        for (int i = 1; i <= n; i++) {
+            res = (res + k) % i;
+        }
+
+        return res + 1;  // convert to 1-based index
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    josephus(n, k) {
+        let res = 0;
+        for (let i = 1; i <= n; i++) {
+            res = (res + k) % i;
+        }
+        return res + 1;
+    }
+}
+
+
+Company Asked: 
+Amazon
+Microsoft
+Walmart

@@ -1,0 +1,109 @@
+📌 GFG POTD – 25 January 2026
+
+❓ Problem Statement:
+Number of Valid Parentheses
+
+📝 Difficulty:
+⭐ Easy
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+⭐ **Star this repo if it helps you!**
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    int findWays(int n) {
+        // Odd length cannot form valid parentheses
+        if (n % 2 != 0) return 0;
+
+        int pairs = n / 2;
+        int[] dp = new int[pairs + 1];
+
+        dp[0] = 1; // empty string
+        dp[1] = 1; // "()"
+
+        for (int i = 2; i <= pairs; i++) {
+            for (int j = 0; j < i; j++) {
+                dp[i] += dp[j] * dp[i - 1 - j];
+            }
+        }
+
+        return dp[pairs];
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def findWays(self, n: int) -> int:
+        if n % 2 != 0:
+            return 0
+
+        pairs = n // 2
+        dp = [0] * (pairs + 1)
+        dp[0] = 1
+        dp[1] = 1
+
+        for i in range(2, pairs + 1):
+            for j in range(i):
+                dp[i] += dp[j] * dp[i - 1 - j]
+
+        return dp[pairs]
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    int findWays(int n) {
+        if (n % 2 != 0) return 0;
+
+        int pairs = n / 2;
+        vector<int> dp(pairs + 1, 0);
+
+        dp[0] = 1;
+        dp[1] = 1;
+
+        for (int i = 2; i <= pairs; i++) {
+            for (int j = 0; j < i; j++) {
+                dp[i] += dp[j] * dp[i - 1 - j];
+            }
+        }
+
+        return dp[pairs];
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    findWays(n) {
+        if (n % 2 !== 0) return 0;
+
+        const pairs = n / 2;
+        const dp = Array(pairs + 1).fill(0);
+
+        dp[0] = 1;
+        dp[1] = 1;
+
+        for (let i = 2; i <= pairs; i++) {
+            for (let j = 0; j < i; j++) {
+                dp[i] += dp[j] * dp[i - 1 - j];
+            }
+        }
+
+        return dp[pairs];
+    }
+}
+
+
+Company Asked: 
+will update soon

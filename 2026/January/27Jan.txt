@@ -1,0 +1,174 @@
+📌 GFG POTD – 27 January 2026
+
+❓ Problem Statement:
+Word Search
+
+📝 Difficulty:
+⭐ Medium
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+⭐ **Star this repo if it helps you!**
+
+🧠 Solution:
+=========================Java Solution==================================
+class Solution {
+    int n, m;
+
+    public boolean isWordExist(char[][] mat, String word) {
+        n = mat.length;
+        m = mat[0].length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (dfs(mat, word, i, j, 0))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean dfs(char[][] mat, String word, int i, int j, int idx) {
+        if (idx == word.length())
+            return true;
+
+        if (i < 0 || j < 0 || i >= n || j >= m || mat[i][j] != word.charAt(idx))
+            return false;
+
+        char temp = mat[i][j];
+        mat[i][j] = '#'; // mark visited
+
+        boolean found =
+            dfs(mat, word, i + 1, j, idx + 1) ||
+            dfs(mat, word, i - 1, j, idx + 1) ||
+            dfs(mat, word, i, j + 1, idx + 1) ||
+            dfs(mat, word, i, j - 1, idx + 1);
+
+        mat[i][j] = temp; // backtrack
+        return found;
+    }
+}
+
+
+=========================Python Solution==============================
+class Solution:
+    def isWordExist(self, mat, word):
+        n, m = len(mat), len(mat[0])
+
+        def dfs(i, j, idx):
+            if idx == len(word):
+                return True
+            if i < 0 or j < 0 or i >= n or j >= m or mat[i][j] != word[idx]:
+                return False
+
+            temp = mat[i][j]
+            mat[i][j] = '#'
+
+            found = (
+                dfs(i+1, j, idx+1) or
+                dfs(i-1, j, idx+1) or
+                dfs(i, j+1, idx+1) or
+                dfs(i, j-1, idx+1)
+            )
+
+            mat[i][j] = temp
+            return found
+
+        for i in range(n):
+            for j in range(m):
+                if dfs(i, j, 0):
+                    return True
+        return False
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    int n, m;
+
+    bool isWordExist(vector<vector<char>>& mat, string word) {
+        n = mat.size();
+        m = mat[0].size();
+
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (dfs(mat, word, i, j, 0))
+                    return true;
+
+        return false;
+    }
+
+    bool dfs(vector<vector<char>>& mat, string& word, int i, int j, int idx) {
+        if (idx == word.size())
+            return true;
+
+        if (i < 0 || j < 0 || i >= n || j >= m || mat[i][j] != word[idx])
+            return false;
+
+        char temp = mat[i][j];
+        mat[i][j] = '#';
+
+        bool found =
+            dfs(mat, word, i+1, j, idx+1) ||
+            dfs(mat, word, i-1, j, idx+1) ||
+            dfs(mat, word, i, j+1, idx+1) ||
+            dfs(mat, word, i, j-1, idx+1);
+
+        mat[i][j] = temp;
+        return found;
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+public:
+    int n, m;
+
+    bool isWordExist(vector<vector<char>>& mat, string word) {
+        n = mat.size();
+        m = mat[0].size();
+
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+                if (dfs(mat, word, i, j, 0))
+                    return true;
+
+        return false;
+    }
+
+    bool dfs(vector<vector<char>>& mat, string& word, int i, int j, int idx) {
+        if (idx == word.size())
+            return true;
+
+        if (i < 0 || j < 0 || i >= n || j >= m || mat[i][j] != word[idx])
+            return false;
+
+        char temp = mat[i][j];
+        mat[i][j] = '#';
+
+        bool found =
+            dfs(mat, word, i+1, j, idx+1) ||
+            dfs(mat, word, i-1, j, idx+1) ||
+            dfs(mat, word, i, j+1, idx+1) ||
+            dfs(mat, word, i, j-1, idx+1);
+
+        mat[i][j] = temp;
+        return found;
+    }
+};
+
+
+Company Asked: 
+Amazon
+Microsoft
+Intuit
+Apple

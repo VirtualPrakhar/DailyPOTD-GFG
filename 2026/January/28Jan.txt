@@ -1,0 +1,204 @@
+📌 GFG POTD – 28 January 2026
+
+❓ Problem Statement:
+Count Subset With Target Sum II
+
+📝 Difficulty:
+⭐ Medium
+
+## 🤝 Support
+Want to Support a POTD or solution?  
+Way1: http://buymeacoffee.com/karthikverma
+Way2: https://ko-fi.com/karthikverma
+
+## 🔗 Connect With Me
+
+- 📺 YouTube: https://www.youtube.com/channel/UCUUPCqRPzEsX-KgM8i7E8Dg
+- 🔗 Campus Prepp Website: https://campusprepp.myinstamojo.com/
+
+⭐ **Star this repo if it helps you!**
+
+🧠 Solution:
+=========================Java Solution==================================
+import java.util.*;
+
+class Solution {
+    public int countSubset(int[] arr, int k) {
+        int n = arr.length;
+        int mid = n / 2;
+
+        int[] left = Arrays.copyOfRange(arr, 0, mid);
+        int[] right = Arrays.copyOfRange(arr, mid, n);
+
+        List<Long> leftSums = new ArrayList<>();
+        List<Long> rightSums = new ArrayList<>();
+
+        generateSums(left, 0, 0, leftSums);
+        generateSums(right, 0, 0, rightSums);
+
+        Collections.sort(rightSums);
+
+        int count = 0;
+        for (long s : leftSums) {
+            long target = k - s;
+            count += upperBound(rightSums, target)
+                   - lowerBound(rightSums, target);
+        }
+
+        return count;
+    }
+
+    private void generateSums(int[] arr, int idx, long sum, List<Long> res) {
+        if (idx == arr.length) {
+            res.add(sum);
+            return;
+        }
+        generateSums(arr, idx + 1, sum, res);
+        generateSums(arr, idx + 1, sum + arr[idx], res);
+    }
+
+    private int lowerBound(List<Long> list, long target) {
+        int l = 0, r = list.size();
+        while (l < r) {
+            int m = (l + r) / 2;
+            if (list.get(m) < target) l = m + 1;
+            else r = m;
+        }
+        return l;
+    }
+
+    private int upperBound(List<Long> list, long target) {
+        int l = 0, r = list.size();
+        while (l < r) {
+            int m = (l + r) / 2;
+            if (list.get(m) <= target) l = m + 1;
+            else r = m;
+        }
+        return l;
+    }
+}
+
+
+=========================Python Solution==============================
+from bisect import bisect_left, bisect_right
+
+class Solution:
+    def countSubset(self, arr, k):
+        n = len(arr)
+        mid = n // 2
+
+        left = arr[:mid]
+        right = arr[mid:]
+
+        def gen_sums(nums):
+            res = []
+            def dfs(i, s):
+                if i == len(nums):
+                    res.append(s)
+                    return
+                dfs(i + 1, s)
+                dfs(i + 1, s + nums[i])
+            dfs(0, 0)
+            return res
+
+        leftSums = gen_sums(left)
+        rightSums = gen_sums(right)
+        rightSums.sort()
+
+        ans = 0
+        for s in leftSums:
+            ans += bisect_right(rightSums, k - s) - bisect_left(rightSums, k - s)
+
+        return ans
+
+
+===========================C++ Solution==============================
+class Solution {
+public:
+    int countSubset(vector<int>& arr, int k) {
+        int n = arr.size();
+        int mid = n / 2;
+
+        vector<int> left(arr.begin(), arr.begin() + mid);
+        vector<int> right(arr.begin() + mid, arr.end());
+
+        vector<long long> L, R;
+        gen(left, 0, 0, L);
+        gen(right, 0, 0, R);
+
+        sort(R.begin(), R.end());
+
+        int ans = 0;
+        for (long long s : L) {
+            ans += upper_bound(R.begin(), R.end(), k - s)
+                 - lower_bound(R.begin(), R.end(), k - s);
+        }
+        return ans;
+    }
+
+    void gen(vector<int>& arr, int i, long long sum, vector<long long>& res) {
+        if (i == arr.size()) {
+            res.push_back(sum);
+            return;
+        }
+        gen(arr, i + 1, sum, res);
+        gen(arr, i + 1, sum + arr[i], res);
+    }
+};
+
+
+=========================JavaScript Solution==============================
+class Solution {
+    countSubset(arr, k) {
+        const mid = Math.floor(arr.length / 2);
+        const left = arr.slice(0, mid);
+        const right = arr.slice(mid);
+
+        const genSums = (nums) => {
+            const res = [];
+            const dfs = (i, sum) => {
+                if (i === nums.length) {
+                    res.push(sum);
+                    return;
+                }
+                dfs(i + 1, sum);
+                dfs(i + 1, sum + nums[i]);
+            };
+            dfs(0, 0);
+            return res;
+        };
+
+        const leftSums = genSums(left);
+        const rightSums = genSums(right).sort((a, b) => a - b);
+
+        const lowerBound = (arr, x) => {
+            let l = 0, r = arr.length;
+            while (l < r) {
+                let m = (l + r) >> 1;
+                if (arr[m] < x) l = m + 1;
+                else r = m;
+            }
+            return l;
+        };
+
+        const upperBound = (arr, x) => {
+            let l = 0, r = arr.length;
+            while (l < r) {
+                let m = (l + r) >> 1;
+                if (arr[m] <= x) l = m + 1;
+                else r = m;
+            }
+            return l;
+        };
+
+        let ans = 0;
+        for (const s of leftSums) {
+            ans += upperBound(rightSums, k - s) - lowerBound(rightSums, k - s);
+        }
+        return ans;
+    }
+}
+
+
+Company Asked: 
+will update soon
